@@ -1,10 +1,13 @@
-# Update a Book
+# Updating a Book Title
 
+## Command:
 ```python
-from bookshelf.models import Book
+retrieved_book.title = "Nineteen Eighty-Four"
+retrieved_book.save()
+print(retrieved_book.title)
+```
 
-book = Book.objects.get(title="1984")
-book.title = "Nineteen Eighty-Four"
-book.save()
-
-print(book)
+## Output:
+```
+Nineteen Eighty-Four
+```

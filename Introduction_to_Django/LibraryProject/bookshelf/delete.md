@@ -1,9 +1,12 @@
-# Delete a Book
+# Deleting a Book
 
+## Command:
 ```python
-from bookshelf.models import Book
+retrieved_book.delete()
+print(Book.objects.all())  # Should be empty
+```
 
-book = Book.objects.get(title="Nineteen Eighty-Four")
-book.delete()
-
-print(Book.objects.all())  # Should print: <QuerySet []>
+## Output:
+```
+<QuerySet []>
+```
