@@ -1,12 +1,13 @@
-# Deleting a Book
+# Delete a Book in Django Shell
 
-## Command:
 ```python
-retrieved_book.delete()
-print(Book.objects.all())  
-```
+from bookshelf.models import Book
 
-## Output:
-```
-<QuerySet []>
-```
+# Retrieve the book instance (assuming it exists)
+book = Book.objects.get(title="Nineteen Eighty-Four")
+
+# Delete the book
+book.delete()
+
+# Verify deletion
+print(Book.objects.all())  # Should print: <QuerySet []>
