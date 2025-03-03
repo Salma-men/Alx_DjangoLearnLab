@@ -127,3 +127,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Redirect after login and logout
 LOGIN_REDIRECT_URL = 'list_books'  # Redirect to the book list page after login
 LOGOUT_REDIRECT_URL = 'login'      # Redirect to the login page after logout
+
+AUTH_USER_MODEL = 'advanced_features_and_security.CustomUser'
+AUTH_USER_MODEL = 'bookshelf.CustomUser'
