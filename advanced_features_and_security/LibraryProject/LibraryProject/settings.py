@@ -147,6 +147,10 @@ SECURE_HSTS_PRELOAD = True
 X_FRAME_OPTIONS = 'DENY'
 SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_BROWSER_XSS_FILTER = True
+# SECURE_PROXY_SSL_HEADER ensures that Django properly handles requests forwarded by a proxy.
+# This is required if you're behind a reverse proxy like Nginx or Apache, which handles the SSL termination.
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+USE_X_FORWARDED_HOST = True
 
 
 # Secure cookies (ensure you're using HTTPS)
