@@ -49,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'csp.middleware.CSPMiddleware',
 ]
 
 ROOT_URLCONF = 'LibraryProject.urls'
@@ -130,3 +131,24 @@ LOGOUT_REDIRECT_URL = 'login'      # Redirect to the login page after logout
 
 AUTH_USER_MODEL = 'advanced_features_and_security.CustomUser'
 AUTH_USER_MODEL = 'bookshelf.CustomUser'
+
+# SECURITY SETTINGS
+DEBUG = False  # Set to False in production
+
+ALLOWED_HOSTS = ['yourdomain.com', '127.0.0.1']  # Update with your actual domain
+
+SECURE_BROWSER_XSS_FILTER = True
+X_FRAME_OPTIONS = 'DENY'
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# Secure cookies (ensure you're using HTTPS)
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+
+# Content Security Policy (CSP)
+CSP_DEFAULT_SRC = ("'self'",)
+CSP_SCRIPT_SRC = ("'self'", "'unsafe-inline'")
+CSP_STYLE_SRC = ("'self'", "'unsafe-inline'")
+CSP_DEFAULT_SRC = ("'self'",)
+CSP_SCRIPT_SRC = ("'self'", "'unsafe-inline'")  # Allow inline scripts if necessary
+CSP_STYLE_SRC = ("'self'", "'unsafe-inline'")  # Allow inline styles
