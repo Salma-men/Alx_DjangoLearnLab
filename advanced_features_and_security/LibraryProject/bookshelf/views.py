@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import permission_required
 from django.http import HttpResponseForbidden
 from .models import Book
-from .forms import BookForm
+from .forms import BookForm 
 
 
 # View for listing books (accessible to users with 'can_view' permission)
