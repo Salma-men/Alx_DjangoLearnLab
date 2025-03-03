@@ -1,13 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.shortcuts import render
+from django.shortcuts import render, Author 
 from django.views.generic.detail import DetailView
 from .models import Library, Book   
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.decorators import user_passes_test
-from django.contrib.auth.decorators import permission_required
-from django.http import HttpResponseForbidden
+from django.contrib.auth.decorators import user_passes_test, permission_required
+
 
 # Function-Based View for Listing Books
 def list_books(request):
@@ -100,38 +99,6 @@ def edit_book(request, book_id):
 
 # View to delete a book (with permission check)
 @permission_required('relationship_app.can_delete_book', raise_exception=True)
-def delete_book(request, book_id):
-    book = get_object_or_404(Book, id=book_id)
-    book.delete()
-    return redirect('book_list')
-# View for listing books (accessible to users with 'can_view' permission)
-@permission_required('bookshelf.can_view', raise_exception=True)
-def book_list(request):
-    books = Book.objects.all()
-    return render(request, 'bookshelf/book_list.html', {'books': books})
-
-# View for creating a book (accessible to users with 'can_create' permission)
-@permission_required('bookshelf.can_create', raise_exception=True)
-def add_book(request):
-    if request.method == "POST":
-        title = request.POST.get('title')
-        author = request.user
-        Book.objects.create(title=title, author=author)
-        return redirect('book_list')
-    return render(request, 'bookshelf/add_book.html')
-
-# View for editing a book (accessible to users with 'can_edit' permission)
-@permission_required('bookshelf.can_edit', raise_exception=True)
-def edit_book(request, book_id):
-    book = get_object_or_404(Book, id=book_id)
-    if request.method == "POST":
-        book.title = request.POST.get('title')
-        book.save()
-        return redirect('book_list')
-    return render(request, 'bookshelf/edit_book.html', {'book': book})
-
-# View for deleting a book (accessible to users with 'can_delete' permission)
-@permission_required('bookshelf.can_delete', raise_exception=True)
 def delete_book(request, book_id):
     book = get_object_or_404(Book, id=book_id)
     book.delete()
