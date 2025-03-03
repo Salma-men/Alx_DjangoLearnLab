@@ -1,7 +1,5 @@
 from django import forms
-from .models import Book
 
-class BookForm(forms.ModelForm):
-    class Meta:
-        model = Book
-        fields = ['title']
+class ExampleForm(forms.Form):
+    title = forms.CharField(max_length=255)  # Input field for the title
+    author = forms.CharField(max_length=255)  # Input field for the author
