@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import permission_required
 from django.http import HttpResponseForbidden
 from .models import Book
 from .forms import BookForm 
+from .forms import ExampleForm
 
 
 # View for listing books (accessible to users with 'can_view' permission)
