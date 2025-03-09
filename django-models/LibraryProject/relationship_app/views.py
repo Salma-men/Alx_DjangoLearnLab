@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.decorators import permission_required
 from .models import UserProfile 
 from django.views.generic import DetailView
-from .models import Book, Library  # Ensure Library is imported!
+from .models import Library
 
 # Function-Based View for Listing Books
 def list_books(request):
