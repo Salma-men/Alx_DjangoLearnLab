@@ -24,7 +24,7 @@ class BookAPITestCase(TestCase):
         """Test retrieving the list of books."""
         response = self.client.get(self.books_list_url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertIn("Test Book", response.json()[0]["title"])
+        self.assertIn("Test Book", response.data[0]["title"])  # Use response.data instead of response.json()
 
     def test_create_book(self):
         """Test creating a new book."""
