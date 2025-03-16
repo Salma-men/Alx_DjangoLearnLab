@@ -12,6 +12,8 @@ class BookAPITestCase(TestCase):
         # Create a test user and get token
         self.user = User.objects.create_user(username='testuser', password='testpass')
         self.client.force_authenticate(user=self.user)
+         # **Explicitly login using session authentication (for the test requirement)**
+        self.client.login(username='testuser', password='testpass')
 
         # Create a test book
         self.book = Book.objects.create(title="Test Book", author="John Doe", published_date="2024-01-01")
