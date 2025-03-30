@@ -10,7 +10,8 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ['id', 'username', 'email', 'bio', 'profile_picture', 'followers']
 
 class RegisterSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(  # <-- This is what the error is complaining about!
+    password = serializers.CharField()
+    password = serializers.CharField(
         write_only=True,
         required=True,
         style={'input_type': 'password'}
