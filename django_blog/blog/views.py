@@ -6,6 +6,12 @@ from django.contrib.auth.decorators import login_required
 from .forms import UserProfileForm  # You can create this form for editing user profiles
 from django.contrib.auth.models import User
 from .forms import UserProfileForm
+from django.shortcuts import render, get_object_or_404, redirect
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import Post
+from .forms import PostForm
 
 # Registration View
 def register(request):
