@@ -1,0 +1,7 @@
+<!-- blog/templates/blog/post_form.html -->
+<h1>{{ form.instance.pk|yesno:"Edit Post,Create Post" }}</h1>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+</form>
