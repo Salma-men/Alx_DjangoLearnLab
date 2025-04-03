@@ -6,6 +6,7 @@ from .views import add_comment, edit_comment, delete_comment
 from .views import CommentCreateView, CommentUpdateView, CommentDeleteView
 from .views import search_posts
 from taggit.views import TaggedItemView
+from .models import Post
 
 
 
