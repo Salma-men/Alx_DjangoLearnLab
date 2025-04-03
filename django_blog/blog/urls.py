@@ -4,6 +4,8 @@ from django.contrib.auth import views as auth_views
 from . import views
 from .views import add_comment, edit_comment, delete_comment
 from .views import CommentCreateView, CommentUpdateView, CommentDeleteView
+from .views import search_posts
+from taggit.views import TaggedItemView
 
 
 
@@ -28,4 +30,6 @@ urlpatterns = [
     path('comment/<int:pk>/edit/', CommentUpdateView.as_view(), name='edit-comment'),
     path('comment/<int:pk>/delete/', CommentDeleteView.as_view(), name='delete-comment'),
     path('comment/<int:pk>/update/', CommentUpdateView.as_view(), name='comment-update'),
+    path('search/', search_posts, name='search'),
+    path('tags/<slug:tag_slug>/', TaggedItemView.as_view(model=Post), name='tagged-posts'),
 ]
