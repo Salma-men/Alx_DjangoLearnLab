@@ -15,7 +15,7 @@ from .forms import PostForm
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .forms import CommentForm 
 from django.db.models import Q
-from .models import Post
+from .models import Post, Tag
 
 
 
@@ -162,13 +162,16 @@ class CommentDeleteView (LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     
 def search_posts(request):
     query = request.GET.get('q')
-    posts = Post.objects.all()
 
     if query:
-        posts = posts.filter(
-            Q(title__icontains=query) |
-            Q(content__icontains=query) |
-            Q(tags__name__icontains=query)  # Search in tags
-        ).distinct()
-
+        posts = Post.objects.filter(Q(title__icontains=query) | Q(content__icontains=query) | Q(tags__name__icontains=query)).distinct()
+    else:
+        posts = Post.objects.all()
+    
     return render(request, 'blog/search_results.html', {'posts': posts, 'query': query})
+
+def posts_by_tag(request, tag_name):
+    tag = get_object_or_404(Tag, name=tag_name)
+    posts = Post.objects.filter(tags=tag)
+    
+    return render(request, 'blog/tagged_posts.html', {'posts': posts, 'tag': tag})
