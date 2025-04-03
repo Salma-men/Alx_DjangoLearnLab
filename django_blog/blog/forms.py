@@ -1,7 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import UserProfile  # Only if you created a custom UserProfile model
+from .models import UserProfile  
 from .models import Post
+from .models import Comment 
 
 
 # Create a form to update the user profile (bio, profile picture)
@@ -14,3 +15,8 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ['title', 'content']
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['content']

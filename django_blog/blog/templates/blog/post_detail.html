@@ -5,3 +5,24 @@
 <p>Published on {{ post.published_date }}</p>
 <a href="{% url 'post_edit' pk=post.pk %}">Edit Post</a>
 <a href="{% url 'post_delete' pk=post.pk %}">Delete Post</a>
+<h2>Comments</h2>
+{% for comment in post.comments.all %}
+    <p><strong>{{ comment.author }}</strong> ({{ comment.created_at }}): {{ comment.content }}</p>
+    {% if comment.author == user %}
+        <a href="{% url 'edit-comment' comment.id %}">Edit</a>
+        <a href="{% url 'delete-comment' comment.id %}">Delete</a>
+    {% endif %}
+{% empty %}
+    <p>No comments yet.</p>
+{% endfor %}
+
+{% if user.is_authenticated %}
+    <h3>Add a Comment</h3>
+    <form method="post" action="{% url 'add-comment' post.id %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Post Comment</button>
+    </form>
+{% else %}
+    <p><a href="{% url 'login' %}">Log in</a> to leave a comment.</p>
+{% endif %}
