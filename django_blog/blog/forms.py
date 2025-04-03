@@ -2,7 +2,8 @@ from django import forms
 from django.contrib.auth.models import User
 from .models import UserProfile  
 from .models import Post
-from .models import Comment 
+from .models import Comment
+from taggit.forms import TagWidget
 
 
 # Create a form to update the user profile (bio, profile picture)
@@ -17,6 +18,9 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ['title', 'content', 'tags']
+        widgets = {
+            'tags': TagWidget(),  # <-- ADD THIS
+        }
 
     def save(self, commit=True):
         instance = super().save(commit=False)
