@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, logout
@@ -175,3 +174,13 @@ def posts_by_tag(request, tag_name):
     posts = Post.objects.filter(tags=tag)
     
     return render(request, 'blog/tagged_posts.html', {'posts': posts, 'tag': tag})
+
+class PostByTagListView(ListView):
+    model = Post
+    template_name = "blog/tagged_posts.html"  # Make sure this template exists
+    context_object_name = "posts"
+
+    def get_queryset(self):
+        tag_name = self.kwargs.get("tag_name")  # Get tag from URL
+        tag = get_object_or_404(Tag, name=tag_name)
+        return Post.objects.filter(tags=tag)

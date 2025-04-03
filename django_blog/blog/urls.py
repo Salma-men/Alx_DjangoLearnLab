@@ -7,6 +7,7 @@ from .views import CommentCreateView, CommentUpdateView, CommentDeleteView
 from .views import search_posts
 from taggit.views import TaggedItemView
 from .models import Post
+from .views import PostByTagListView
 
 
 
@@ -33,4 +34,5 @@ urlpatterns = [
     path('comment/<int:pk>/update/', CommentUpdateView.as_view(), name='comment-update'),
     path('search/', search_posts, name='search'),
     path('tags/<slug:tag_slug>/', TaggedItemView.as_view(model=Post), name='tagged-posts'),
+    path("tags/<str:tag_name>/", PostByTagListView.as_view(), name="posts_by_tag"),
 ]
